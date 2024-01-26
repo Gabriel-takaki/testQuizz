@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stepper Quiz</title>
+    <style>
+        body {
+            padding: 40px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .noCurrent {
+            display: none;
+        }
+
+        .current {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: baseline;
+            text-align: center;
+            padding: 20px;
+            padding-top: 40px;
+            max-width: 380px;
+            opacity: 0;
+            animation: appear 500ms ease-in;
+            animation-fill-mode: forwards;
+
+        }
+
+        .stepperBar {
+            background-color: #F5F5F5;
+            padding: 3px 0;
+            border-radius: 3px;
+            width: 400px;
+        }
+
+        .headerFixxed {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .progressBar {
+            background-color: #008cff;
+            ;
+            width: 2%;
+            padding: 4px 0;
+            border-radius: 3px;
+            animation: progress 750ms ease-out;
+            animation-fill-mode: forwards;
+        }
+
+        
+
+        .title {
+            font-size: 19px;
+            line-height: 140%;
+            letter-spacing: -0.5px;
+            margin: 0 0 12px 0;
+            font-weight: 700;
+        }
+
+        .description {
+            margin: 0 0 18px 0;
+            line-height: 150%;
+            font-size: 14px;
+            display: block;
+        }
+
+        .option {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            padding: 20px 30px;
+            border-radius: 12px;
+            position: relative;
+            margin: 5px;
+            font-weight: 700;
+            color: #111111;
+            background: #EEEEEE;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .option:hover {
+            color: #F5F5F5;
+            background: #375273;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .imageStep1 {
+            width: 300px;
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            margin-left: -150px;
+            z-index: 0;
+        }
+
+        .simpleButton {
+            text-align: center;
+            margin: 5px;
+            padding: 20px 10px;
+            width: 180px;
+        }
+
+
+        .continueButton {
+            width: 400px;
+            cursor: pointer;
+            display: block;
+            box-sizing: border-box;
+            text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 17px;
+            margin: 0 0 15px 0;
+            text-decoration: none;
+            border-radius: 8px;
+            z-index: 8;
+            transition: background 200ms;
+            animation: appear 500ms ease-out;
+            animation-fill-mode: forwards;
+            animation-delay: 10s;
+            background: #2b8bff;
+            color: #FFFFFF;
+            border: none;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .continueButton:hover {
+            background: #375273;
+        }
+
+        .askIcon {
+            width: 46px;
+            margin-right: 10px;
+        }
+
+
+        .reportScore {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            padding: 20px 30px;
+            border-radius: 12px;
+            border: 1px solid #4d4c4c;
+            position: relative;
+            margin: 5px;
+            font-weight: 700;
+            color: #111111;
+            background: #EEEEEE;
+            border: none;
+            width: 100%;
+            font-size: 11px;
+            height: 200px;
+            width: 200px;
+            box-sizing: border-box;
+        }
+
+        .reportScore img {
+            height: 80%;
+        }
+
+        .reportScoreHeader {
+            color: #FFFFFF;
+            background: #ff5b45;
+            border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+
+        .circular {
+            margin-top: 20px;
+            height: 100px;
+            width: 100px;
+            position: relative;
+        }
+
+        .circular .inner,
+        .circular .outer,
+        .circular .circle {
+            position: absolute;
+            z-index: 6;
+            height: 100%;
+            width: 100%;
+            border-radius: 100%;
+            box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .circular .inner {
+            top: 50%;
+            left: 50%;
+            height: 80px;
+            width: 80px;
+            margin: -40px 0 0 -40px;
+            background-color: #EEEEEE;
+            border-radius: 100%;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .circular .circle {
+            z-index: 1;
+            box-shadow: none;
+        }
+
+        .circular .numb {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            font-size: 18px;
+            font-weight: 500;
+            color: #000;
+        }
+
+        .circular .bar {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: #fff;
+            -webkit-border-radius: 100%;
+            clip: rect(0px, 100px, 100px, 50px);
+        }
+
+        .circle .bar .progress {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            -webkit-border-radius: 100%;
+            clip: rect(0px, 50px, 100px, 0px);
+        }
+
+        .circle .bar .progress,
+        .dot span {
+            background: #ff5b45;
+        }
+
+        .circle .left .progress {
+            z-index: 1;
+            animation: left 0.75s linear both;
+        }
+
+
+
+        .circle .right {
+            z-index: 3;
+            transform: rotate(180deg);
+        }
+
+        .circle .right .progress {
+            animation: right 4s linear both;
+            animation-delay: 4s;
+        }
+
+
+
+        .circle .dot {
+            z-index: 2;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 50%;
+            height: 10px;
+            margin-top: -5px;
+            animation: dot 8s linear both;
+            transform-origin: 0% 50%;
+        }
+
+        .circle .dot span {
+            position: absolute;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 100%;
+        }
+
+        .chartsDiv {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            padding: 20px 30px;
+            border-radius: 12px;
+            border: 1px solid #4d4c4c;
+            position: relative;
+            margin: 5px 0;
+            font-weight: 700;
+            color: #111111;
+            background: linear-gradient(to top right, #F0F0F0, #FBFBFB);
+            border: none;
+            width: 100%;
+            font-size: 11px;
+            height: 150px;
+            width: 400px;
+            box-sizing: border-box;
+        }
+
+        .chartDiv {
+            padding: 10px;
+            padding-left: 20px;
+            padding-right: 40px;
+            border-right: 1px solid #dbd6d6;
+        }
+
+        .bar {
+            width: 30px;
+            height: 80px;
+            border-radius: 3px;
+            background: #e4e1e1;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .barContent {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffff;
+        }
+
+        .preocupantDiv {
+            background: linear-gradient(to top right, #fffeea, #fffeea);
+            animation: appear 500ms ease-in;
+            animation-delay: 9s;
+            animation-fill-mode: forwards;
+            width: 100%;
+            display: block;
+            box-sizing: border-box;
+            margin: 10px 0 0 0;
+            padding: 18px 15px;
+            border-radius: 8px;
+            text-align: initial;
+        }
+
+        .finishCard {
+            background: linear-gradient(to top right, #F0F0F0, #FBFBFB);
+            border: solid 1px #E5E5E5;
+            padding: 10px 0;
+            border-radius: 10px;
+        }
+
+
+        .finishCardHeader {
+            padding: 5px 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        .finishCardImgs {
+            padding: 10px 0 0 0;
+            display: flex;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: #FFFFFF;
+            background-image: url('https://app.descubrahoje.net/novo-tonico/images/transform.jpg');
+        }
+
+        .descriptions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .descriptionDiv {
+            height: 180px;
+            padding: 5px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .checkoutStatus {
+            width: 100%;
+            display: block;
+            box-sizing: border-box;
+            padding: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .securePayment {
+            background: #ebfcf4;
+            color: #02c73e;
+            margin: 0 auto;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 400;
+            border-radius: 8px;
+            text-align: center;
+            display: inline;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .securePayment img {
+            width: 15px;
+        }
+
+
+        .testDiv {
+            width: 100%;
+            display: flex;
+            margin: 20px;
+            text-align: left;
+            justify-content: space-between;
+            border-radius: 10px;
+            overflow: hidden;
+            padding-left: 20px;
+            border: 3px solid #0059ff;
+
+        }
+
+        .semComp {
+            background: linear-gradient(to top right, #ebfcf4, #ebfcf4);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 20px;
+        }
+
+
+        .c-loader {
+  animation: is-rotating 1s infinite;
+  border: 6px solid #e5e5e5;
+  border-radius: 50%;
+  border-top-color: #0059ff;
+  height: 50px;
+  width: 50px;
+}
+
+@keyframes appear{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+
+}
+
+
+
+@keyframes is-rotating {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+        @keyframes left {
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+
+        @keyframes right {
+            /* 100% {
+                transform: rotate(180deg);
+            } */
+        }
+
+        @keyframes dot {
+            0% {
+                transform: rotate(-90deg);
+            }
+
+            50% {
+                transform: rotate(90deg);
+                z-index: 4;
+            }
+
+            100% {
+                /* transform: rotate(250deg);
+                z-index: 4; */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="headerFixxed">
+        <img style="margin-bottom: 16px; height: 80%;" src="https://app.descubrahoje.net/novo-tonico/images/logo.svg"
+            alt="">
+        <div class="stepperBar">
+            <div class="progressBar">
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- div 0 -->
+
+    <div id="id0" class="current">
+
+        <h1 class="title">
+            Qual é a sua idade?
+        </h1>
+
+        <span class="description">
+            Isso é importante para entendermos o nível da sua testosterona e ansiedade.
+        </span>
+
+
+        <div class="buttons">
+            <button class="option" onclick="nextStep()" style="padding-bottom: 0;">
+                18 a 25
+                <img style="width: 140px; margin-top: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/homem_18anos_modelo1.webp" alt="">
+            </button>
+            <button class="option" onclick="nextStep()" style="padding-bottom: 0;">
+                26 a 46
+                <img style="width: 140px; margin-top: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/homem_30anos_modelo3.webp" alt="">
+            </button>
+        </div>
+
+        <div class="buttons">
+            <button class="option" onclick="nextStep()" style="padding-bottom: 0;">
+                46 a 55
+                <img style="width: 140px; margin-top: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/homem_40anos_modelo2.webp" alt="">
+            </button>
+            <button class="option" onclick="nextStep()" style="padding-bottom: 0;">
+                56 ou mais
+                <img style="width: 140px; margin-top: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/homem_50anos_modelo3.webp" alt="">
+            </button>
+        </div>
+
+    </div>
+
+    <div class="noCurrent" id="id1">
+        <h1 class="title">Com qual frequência você perde o controle no sexo e acaba gozando mais rápido do que gostaria?
+        </h1>
+        <span class="description">Selecione o que melhor se encaixa no seu caso</span>
+
+        <div class="buttons">
+            <button class="option simpleButton" onclick="nextStep()">
+                Sempre
+            </button>
+            <button class="option simpleButton" onclick="nextStep()">
+                Quase sempre
+            </button>
+        </div>
+
+        <div class="buttons">
+            <button class="option simpleButton" onclick="nextStep()">
+                Muitas vezes
+            </button>
+            <button class="option simpleButton" onclick="nextStep()">
+                Poucas vezes
+            </button>
+        </div>
+
+        <img class="imageStep1" src="https://app.descubrahoje.net/novo-tonico/images/deitado_cama_2.webp" alt="">
+
+
+    </div>
+
+    <!-- Add more question containers here -->
+
+    <div class="noCurrent" id="id2">
+        <h1 class="title">
+            Quanto tempo você aguenta
+            <br>
+            na maioria das vezes?
+        </h1>
+
+
+        <div class="buttons">
+            <button class="option" onclick="nextStep()">
+                <img style="width: 140px; margin-top: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/emojis/007.avif" alt="">
+                20 minutos <br> ou menos
+            </button>
+            <button class="option" onclick="nextStep()">
+                <img style="width: 140px; margin-top: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/emojis/028.avif" alt="">
+                15 minutos <br> ou menos
+            </button>
+        </div>
+
+        <div class="buttons">
+            <button class="option" onclick="nextStep()">
+                <img style="width: 140px; margin-top: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/emojis/028.avif" alt="">
+                15 minutos <br> ou menos
+            </button>
+            <button class="option" onclick="nextStep()">
+                <img style="width: 140px; margin-top: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/emojis/028.avif" alt="">
+                15 minutos <br> ou menos
+            </button>
+        </div>
+    </div>
+
+    <div class="noCurrent" id="id3">
+        <h1 class="title">
+            Você sofre com ejaculação
+            <br>
+            precoce há quanto tempo?
+        </h1>
+
+
+        <div class="buttons">
+            <button class="option simpleButton" onclick="nextStep()">
+                Já faz alguns <br> meses
+            </button>
+            <button class="option simpleButton" onclick="nextStep()">
+                Há algumas <br> semanas
+            </button>
+        </div>
+
+        <div class="buttons">
+            <button class="option simpleButton" onclick="nextStep()">
+                Faz alguns <br> anos
+            </button>
+            <button class="option simpleButton" onclick="nextStep()">
+                Começou faz <br> alguns dias
+            </button>
+        </div>
+
+        <img class="imageStep1" src="https://app.descubrahoje.net/novo-tonico/images/doutor2.webp" alt="">
+
+    </div>
+
+
+    <div class="noCurrent" id="id4">
+        <h1 class="title">
+            Você não está sozinho !
+        </h1>
+
+        <span class="description">
+            Para eliminar a Ejaculação Precoce de maneira definitiva, primeiro você precisa descobrir a raiz do problema
+            e depois seguir uma Receita que funcione especificamente para VOCÊ!
+        </span>
+
+        <img src="https://app.descubrahoje.net/novo-tonico/images/doutor1.webp" alt="">
+
+        <button class="continueButton" onclick="nextStep()">
+            Continuar
+        </button>
+    </div>
+
+    <div id="id5" class="noCurrent">
+        <h1 class="title">
+            Como você se sente <br> quando isso acontece?
+        </h1>
+
+        <span class="description">
+            Não deveria ser tão rápido ...
+        </span>
+
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            <img class="askIcon" src="https://app.descubrahoje.net/novo-tonico/images/emojis/034.avif" alt="">
+            <span>Já me acostumei, e por isso não faço mais sexo</span>
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            <img class="askIcon" src="https://app.descubrahoje.net/novo-tonico/images/emojis/020.avif" alt="">
+            <span>Me sinto mal, e sei que preciso buscar ajuda</span>
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            <img class="askIcon" src="https://app.descubrahoje.net/novo-tonico/images/emojis/044.avif" alt="">
+            <span>Me sinto péssimo, mas não sei o que fazer</span>
+        </div>
+    </div>
+
+    <div id="id6" class="noCurrent">
+        <h1 class="title">
+            Esse problema já causou outros <br> problemas ainda maiores?
+        </h1>
+
+        <span class="description">
+            Isso pode trazer consequencias <br> muito ruins
+        </span>
+
+        <div style="display: flex;">
+            <img style="max-width: 230px;" src="https://app.descubrahoje.net/novo-tonico/images/doutor3.webp" alt="">
+            <div style="display: flex; flex-direction: column;">
+                <button class="option simpleButton" onclick="nextStep()">
+                    Sim, já causou <br> muitos problemas
+                </button>
+                <button class="option simpleButton" onclick="nextStep()">
+                    Sim, já causou <br> discussões
+                </button>
+                <button class="option simpleButton" onclick="nextStep()">
+                    Por enquanto <br> não causou
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="noCurrent" id="id7">
+        <h1 class="title">
+            Cuidado !
+        </h1>
+
+        <span class="description">
+            A ejaculação precoce pode causar <br> problemas ainda maiores.
+        </span>
+
+        <img src="https://app.descubrahoje.net/novo-tonico/images/doutor4.webp" alt="">
+
+        <button class="continueButton" onclick="nextStep()">
+            Continuar
+        </button>
+    </div>
+
+
+    <div class="noCurrent" id="id8">
+        <h1 class="title">
+            Quando você vai fazer sexo, você se
+            <br>
+            sente nervoso e inseguro ?
+        </h1>
+
+
+        <div class="buttons">
+            <button class="option simpleButton" onclick="nextStep()">
+                sim
+            </button>
+            <button class="option simpleButton" onclick="nextStep()">
+                Na maioria das vezes
+            </button>
+        </div>
+
+        <div class="buttons">
+            <button class="option simpleButton" onclick="nextStep()">
+                Me sinto ansioso
+            </button>
+            <button class="option simpleButton" onclick="nextStep()">
+                Raramente
+            </button>
+        </div>
+
+        <img class="imageStep1" src="https://app.descubrahoje.net/novo-tonico/images/deitado_cama_4.webp" alt="">
+
+    </div>
+
+
+    <div id="id9" class="noCurrent">
+        <h1 class="title">
+            Por que você acha que não consegue controlar a ejaculação precoce?
+        </h1>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            A vontade de gozar vem rápido <br> e não da para controlar
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Meu pênis fica muito <br> sensível no sexo
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Fico muito ansioso e nervoso <br> na hora do sexo
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Quando começo meter sem parar <br> gozo rápido
+        </div>
+    </div>
+
+
+    <div id="id10" class="noCurrent">
+        <h1 class="title">
+            Na sua opinião, quanto é <br> um tempo bom na cama?
+        </h1>
+
+        <span class="description">Escolha o que mais faz sentido para você.</span>
+
+        <div style="display: flex;">
+            <img style="max-width: 260px;" src="https://app.descubrahoje.net/novo-tonico/images/doutor3.webp" alt="">
+            <div style="display: flex; flex-direction: column;">
+                <button class="option simpleButton" onclick="nextStep()">
+                    Quanto mais tempo, melhor!
+                </button>
+                <button class="option simpleButton" onclick="nextStep()">
+                    Quero durar pelo menos 5 minutos
+                </button>
+                <button class="option simpleButton" onclick="nextStep()">
+                    Quero durar pelo menos 10 minutos
+                </button>
+                <button class="option simpleButton" onclick="nextStep()">
+                    Quero durar 30 minutos ou mais
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="id11" class="noCurrent">
+        <h1 class="title">
+            Você assiste vídeos pornôs?
+        </h1>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Sim, assisto com frequência
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Sim, às vezes
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Já assisti, mas parei
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Não gosto de assistir
+        </div>
+    </div>
+
+    <div id="id12" class="noCurrent">
+
+        <h1 class="title">
+            Vocẽ já procurou ajuda ?
+        </h1>
+
+        <span class="description">
+            Você já tentou resolver <br> este problema antes ?
+        </span>
+
+
+        <div class="buttons">
+            <button class="option" onclick="nextStep()" style="padding: 40px 60px">
+                sim
+                <img style="width: 80px; margin-top: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/emojis/063.avif" alt="">
+            </button>
+            <button class="option" onclick="nextStep()" style="padding: 40px 60px">
+                não
+                <img style="width: 80px; margin-top: 10px; ;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/emojis/057.avif" alt="">
+            </button>
+        </div>
+    </div>
+
+
+
+    <div class="noCurrent" id="id13">
+        <h1 class="title">
+            Cuidado com as capsulas !
+        </h1>
+
+        <span class="description">
+            Grande parte das cápsulas que <br> existem no mercado não funcionam.
+        </span>
+
+        <img src="https://app.descubrahoje.net/novo-tonico/images/capsulas1.webp" alt="">
+
+        <button class="continueButton" onclick="nextStep()">
+            Continuar
+        </button>
+    </div>
+
+    <div id="id14" class="noCurrent">
+
+    </div>
+
+    <div id="id15" class="noCurrent">
+        <h1 class="title">
+            analisando
+        </h1>
+        <br>
+        <span>Estamos analisando suas respostas <br> e preparando seu relatório</span>
+        <br>
+        <div class="c-loader"></div>
+    </div>
+
+    <div class="noCurrent" id="id16">
+        <h1 class="title"> Análise inicial do seu perfil </h1>
+        <div class="buttons">
+            <div class="reportScore">
+                SEU DIAGNÓSTICO
+                <div class="circular">
+                    <div class="inner"></div>
+                    <div class="outer"></div>
+                    <div class="numb">
+                        0%
+                    </div>
+                    <div class="circle">
+                        <div class="dot">
+                            <span></span>
+                        </div>
+                        <div class="bar left">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="bar right">
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="reportScore" style="padding: 0; overflow: hidden;">
+                <div class="reportScoreHeader" style="width: 100%;">
+                    Resultado: Ruim 🙂
+                </div>
+                <img src="https://app.descubrahoje.net/novo-tonico/images/homem_18anos_modelo1.webp" alt="">
+            </div>
+        </div>
+
+        <div class="chartsDiv">
+            <div class="chart1 chartDiv">
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background: linear-gradient(to top, #9c8702, #ffe229); height: 57%; width: 80px;">
+                        57%
+                    </div>
+                </div>
+            </div>
+            <div class="chart2 chartDiv">
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background: linear-gradient(to top, #b35c1e, #ff5b45); height: 44%; width: 80px;">
+                        44%
+                    </div>
+                </div>
+            </div>
+            <div class="chart3 chartDiv">
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background: linear-gradient(to top, #b35c1e, #ff5b45); height: 39%; width: 80px;">
+                        39%
+                    </div>
+                </div>
+            </div>
+            <div class="chart4 chartDiv">
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background: linear-gradient(to top, #b35c1e, #ff5b45); height: 33%; width: 80px;">
+                        33%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="preocupantDiv">
+            <span style="font-weight: 600;"> Sua situação é preocupante.</span>
+            <br>
+            <span>Você receberá uma receita desenvolvida por grandes médicos e urologistas especialistas em performance
+                sexual masculina de alta qualidade.</span>
+        </div>
+
+        <button class="continueButton" onclick="nextStep()">
+            Continuar
+        </button>
+    </div>
+
+    <div id="id17" class="noCurrent">
+        <h1 class="title">
+            Qual a qualidade da sua ereção?
+        </h1>
+
+        <span class="description">
+            Isso é importante para descobrirmos a raiz do problema.
+        </span>
+
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            <img class="askIcon" src="https://app.descubrahoje.net/novo-tonico/images/emojis/034.avif" alt="">
+            <span>Fico bastante duro, mas <br> gozo rápido</span>
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            <img class="askIcon" src="https://app.descubrahoje.net/novo-tonico/images/emojis/020.avif" alt="">
+            <span>Fica mole do nada quando tenho ansiedade</span>
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            <img class="askIcon" src="https://app.descubrahoje.net/novo-tonico/images/emojis/044.avif" alt="">
+            <span>Tenho dificuldade para <br> ficar duro</span>
+        </div>
+    </div>
+
+    <div id="id18" class="noCurrent">
+        <h1 class="title">
+            Diga-nos o que você gostaria de<br> melhorar com o seu Tônico?
+
+        </h1>
+
+
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Quero durar mais tempo transando
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Quero ter ereções mais fortes
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            As duas opções acima
+        </div>
+    </div>
+
+
+    <div class="noCurrent" id="id19">
+        <h1 class="title">
+            Quanto tempo você quer
+            <br>
+            durar na cama ?
+        </h1>
+
+
+        <div class="buttons">
+            <button class="option" style="padding: 20px 60px;" onclick="nextStep()">
+                <img style="width: 80px; margin-bottom: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/q16o1.png" alt="">
+                até 5 minutos
+            </button>
+            <button class="option" style="padding: 20px 60px;" onclick="nextStep()">
+                <img style="width: 80px; margin-bottom: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/q16o2.png" alt="">
+                até 15 minutos
+            </button>
+        </div>
+
+        <div class="buttons">
+            <button class="option" style="padding: 20px 60px;" onclick="nextStep()">
+                <img style="width: 80px; margin-bottom: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/q16o3.png" alt="">
+                até 30 minutos
+            </button>
+            <button class="option" style="padding: 20px 60px;" onclick="nextStep()">
+                <img style="width: 80px; margin-bottom: 10px;"
+                    src="https://app.descubrahoje.net/novo-tonico/images/q16o4.png" alt="">
+                1 hora ou mais
+            </button>
+        </div>
+    </div>
+
+    <div id="id20" class="noCurrent">
+        <h1 class="title">
+            Em quanto tempo você quer<br> eliminar a Ejaculação Precoce??
+        </h1>
+
+        <span class="description">Diremos quais ingredientes usar e a quantidade certa para tomar de acordo com o tempo
+            que você quer os resultados.</span>
+
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Quero eliminar a ejaculação precoce em 24 horas
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Quero eliminar e ejaculação precoce com 2 semanas de tratamento
+        </div>
+
+        <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
+            Quero eliminar a ejaculação precoce com 1 mês de tratamento
+        </div>
+    </div>
+
+    <div id="id21" class="noCurrent">
+
+    </div>
+
+    <div id="id22" class="noCurrent">
+        <h1 class="title">
+            analisando
+        </h1>
+        <span>Estamos analisando suas respostas <br> e preparando seu relatório</span>
+        <div class="c-loader"></div>
+    </div>
+
+    <div id="id23" class="noCurrent">
+        <h1 class="title">Sua receita exclusiva</h1>
+        <span class="description">Baseado no seu perfil, montamos uma <br> receita exclusivo pra você. </span>
+        <h1 class="title">Você vai durar mais de 1 hora <br> na cama em <u>14 dias</u></h1>
+
+        <div class="chartsDiv">
+            <div class="chart1 chartDiv">
+
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background:linear-gradient(to top, #909e10, #d3e815); height: 20%; width: 80px;">
+                        HOJE
+                    </div>
+                </div>
+            </div>
+            <div class="chart2 chartDiv">
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height: 44%; width: 80px;">
+                        2H
+                    </div>
+                </div>
+            </div>
+            <div class="chart3 chartDiv">
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height: 70%; width: 80px;">
+                        7D
+                    </div>
+                </div>
+            </div>
+            <div class="chart4 chartDiv">
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height:90%; width: 80px;">
+                        14d
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="preocupantDiv">
+            <span style="font-weight: 600;"> Seu tratamento está pronto.</span>
+            <br>
+            <span>Criamos uma receita caseira personalizada para você. Você vai gozar so quando decidir em <strong>14
+                    dias</strong>.</span>
+        </div>
+
+        <button class="continueButton" onclick="nextStep()">
+            Continuar
+        </button>
+    </div>
+
+    <div id="id24" class="noCurrent">
+        <h1 class="title">
+            Conheça agora a sua <br> receita caseira exclusiva.
+        </h1>
+        <div class="finishCard">
+            <div class="finishCardHeader">
+                <div>
+                    HOJE
+                </div>
+                <div>
+                    DEPOIS
+                </div>
+            </div>
+
+            <div class="finishCardImgs">
+                <img src="https://app.descubrahoje.net/novo-tonico/images/checkout_30anos_1.webp" alt="">
+                <img src="https://app.descubrahoje.net/novo-tonico/images/checkout_30anos_2.webp" alt="">
+            </div>
+
+            <div class="descriptions">
+                <div class="description">
+                    <span class="description">
+                        Duração das suas
+                        <br>
+                        relações sexuais
+                        <br>
+                        atualemnte
+                    </span>
+
+                    <div class="checkoutStatus" style="    background: #de4949;
+                    color: #FFFFFF; max-width:190px ">
+                        Sua duração esá muito abaixo da média
+                    </div>
+                </div>
+                <div class="description">
+                    <span class="description">
+                        Duração das suas
+                        <br>
+                        relações sexuais
+                        <br>
+                        atualemnte
+                    </span>
+
+                    <div class="checkoutStatus" style="    background: #2edf0b;
+                    color: #FFFFFF; max-width: 190px">
+                        Você vai durar pelo menos uma hora na cama
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="continueButton" onclick="nextStep()" style="position:relative ; margin-top: 30px;">
+            Continuar
+        </button>
+
+        <div class="securePayment">
+            <img src="https://app.descubrahoje.net/novo-tonico/images/icons/safe.webp" alt="">
+            Pagamento 100% seguro
+        </div>
+
+        <h1 class="title" style="margin: 30px 0;">Sua receita caseira exclusiva <br> para durar mais de <br> está
+            pronta. </h1>
+
+        <div class="chartsDiv">
+            <div class="chart1 chartDiv">
+
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background:linear-gradient(to top, #909e10, #d3e815); height: 20%; width: 80px;">
+                        HOJE
+                    </div>
+                </div>
+            </div>
+            <div class="chart2 chartDiv">
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height: 44%; width: 80px;">
+                        2H
+                    </div>
+                </div>
+            </div>
+            <div class="chart3 chartDiv">
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height: 70%; width: 80px;">
+                        7D
+                    </div>
+                </div>
+            </div>
+            <div class="chart4 chartDiv">
+                <div class="bar">
+                    <div class="barContent"
+                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height:90%; width: 80px;">
+                        14d
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="testDiv">
+            <div style="display: flex; flex-direction: column;">
+                <span class="title">TESTE POR 30 DIAS</span>
+                <span>Sem compromisso</span>
+            </div>
+
+            <div style="background: #c7fcdc; text-align: center; padding: 10px 20px;">
+                por apenas
+                <br>
+                <span style="font-weight: 600; font-size: 20px;">R$ 5,77</span>
+            </div>
+        </div>
+
+
+        <button class="continueButton" onclick="nextStep()" style="position:relative ; margin-top: 30px;">
+            Começar agora
+        </button>
+        <div class="securePayment">
+            <img src="https://app.descubrahoje.net/novo-tonico/images/icons/safe.webp" alt="">
+            Pagamento 100% seguro
+        </div>
+
+        <div class="semComp">
+            <img style="margin-bottom: 20px;" src="https://app.descubrahoje.net/novo-tonico/images/icons/garanty.webp"
+                alt="">
+            <h1 class="title">TESTE SEM COMPROMISSO !</h1>
+
+            <span>Aqui sua satisfação é garantida, você tem 30 dias de <strong>garantia incondicional</strong>
+                <br>
+                <br>
+
+                <span>Faça a sua inscrição agora e receba um período de teste de 30 dias sem compromisso.</span>
+                <br>
+                <br>
+                <span>Faremos seu reembolso de forma imediata, sem fazer perguntas.</span>
+            </span>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        let currentQuestion = 0;
+        let score = 0;
+
+
+        function nextStep() {
+            if (currentQuestion == 0) {
+                document.getElementById('id' + currentQuestion).classList.remove('current');
+                document.getElementById('id' + currentQuestion).classList.add('noCurrent');
+                currentQuestion++;
+                document.getElementById('id' + currentQuestion).classList.add('current');
+                // aumenta a largura da barra de load dinamicamente com o currentQuestion
+                document.querySelector('.progressBar').style.width = (currentQuestion * 100) / 24 + "%";
+                // aumenta a animação da barra de load dinamicamente com o currentQuestion
+              
+                return
+            }
+
+            if (currentQuestion == 13 || currentQuestion == 20) {
+                document.getElementById('id' + currentQuestion).classList.remove('current');
+                document.getElementById('id' + currentQuestion).classList.add('noCurrent');
+                currentQuestion++;
+                document.querySelector('.progressBar').style.width = (currentQuestion * 100) / 24 + "%";
+                setTimeout(() => {
+                    nextStep()
+                }, 3000)
+            }
+
+            if (currentQuestion == 15) {
+                const numb = document.querySelector(".numb");
+                let counter = 0;
+                setInterval(() => {
+                    if (counter == 48) {
+                        clearInterval();
+                    } else {
+                        counter += 1;
+                        numb.textContent = counter + "%";
+                    }
+                }, 20);
+            }
+
+            document.getElementById('id' + currentQuestion).classList.remove('current');
+            currentQuestion++;
+            document.getElementById('id' + currentQuestion).classList.add('current');
+            document.querySelector('.progressBar').style.width = (currentQuestion * 100) / 24 + "%";
+        }
+
+        function nextQuestion(nextQuestionId) {
+            const currentQuestionId = 'question' + currentQuestion;
+            const radios = document.querySelector(`#${currentQuestionId} input[type=radio]:checked`);
+
+            if (!radios) {
+                alert("Please select an option.");
+                return;
+            }
+
+            const userAnswer = radios.value;
+
+
+            hideQuestion(currentQuestionId);
+            currentQuestion++;
+
+            if (currentQuestion <= 2) {
+                showQuestion(nextQuestionId);
+            } else {
+                showResult();
+            }
+        }
+
+        function showQuestion(questionId) {
+            document.getElementById(questionId).classList.add('current-question');
+        }
+
+        function hideQuestion(questionId) {
+            document.getElementById(questionId).classList.remove('current-question');
+        }
+
+
+    </script>
+</body>
+
+</html>
