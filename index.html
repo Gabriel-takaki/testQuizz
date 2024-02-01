@@ -58,7 +58,7 @@
             animation-fill-mode: forwards;
         }
 
-        
+
 
         .title {
             font-size: 19px;
@@ -299,7 +299,7 @@
             display: flex;
             text-align: center;
             align-items: center;
-            padding: 20px 30px;
+            padding: 10px;
             border-radius: 12px;
             border: 1px solid #4d4c4c;
             position: relative;
@@ -310,9 +310,26 @@
             border: none;
             width: 100%;
             font-size: 11px;
-            height: 150px;
+            height: 180px;
             width: 400px;
             box-sizing: border-box;
+        }
+
+        .chart {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            width: 25%;
+            border-right: 1px solid #ddd6d6;
+            padding-right: 10px;
+        }
+
+        .chart span {
+            font-size: 0.6rem;
+            color: #302e2e;
         }
 
         .chartDiv {
@@ -363,9 +380,12 @@
 
 
         .finishCardHeader {
-            padding: 5px 30px;
+            padding: 5px 20px;
+            font-weight: 600;
+            height: 40px;
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: space-around;
         }
 
 
@@ -380,9 +400,11 @@
         }
 
         .descriptions {
+            padding-top: 20px;
             display: flex;
+            font-weight: 600;
             align-items: center;
-            justify-content: center;
+            justify-content: space-around;
         }
 
         .descriptionDiv {
@@ -449,31 +471,94 @@
 
 
         .c-loader {
-  animation: is-rotating 1s infinite;
-  border: 6px solid #e5e5e5;
-  border-radius: 50%;
-  border-top-color: #0059ff;
-  height: 50px;
-  width: 50px;
-}
-
-@keyframes appear{
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-
-}
+            animation: is-rotating 1s infinite;
+            border: 6px solid #e5e5e5;
+            border-radius: 50%;
+            border-top-color: #0059ff;
+            height: 50px;
+            width: 50px;
+        }
 
 
+        .reciviments {
+            width: 400px;
+            text-align: left;
+            display: flex;
+            font-size: 0.95rem;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            margin: 40px 0 10px 0;
+            border-radius: 8px;
+            background: linear-gradient(to top right, #edfaff, #edfaff);
+        }
 
-@keyframes is-rotating {
-  to {
-    transform: rotate(1turn);
-  }
-}
+        .reciviments span {
+            padding: 5px;
+        }
+
+        .stats {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .stat {
+            width: 130px;
+            margin: 0 5px;
+            border-radius: 10px;
+            height: 100%;
+            background: #fffee6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.75rem;
+        }
+
+        .goals{
+            width: 200px;
+            margin: 10px 5px;
+            height: 100px;
+            background: #edfbff;
+            display: flex;
+            align-items: initial;
+            justify-content: center;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            font-size: 0.8rem;
+            flex-direction: column;
+            font-weight: 600;
+            border-radius: 10px;
+            text-align: initial;
+        }
+
+        .goals img{
+            height: 25px;
+            margin-right: 10px;
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+
+        }
+
+
+
+        @keyframes is-rotating {
+            to {
+                transform: rotate(1turn);
+            }
+        }
 
         @keyframes left {
             100% {
@@ -510,8 +595,7 @@
 
 
     <div class="headerFixxed">
-        <img style="margin-bottom: 16px; height: 80%;" src="imagens/logo (1).svg"
-            alt="">
+        <img style="margin-bottom: 16px; height: 80%;" src="imagens/logo (1).svg" alt="">
         <div class="stepperBar">
             <div class="progressBar">
 
@@ -520,67 +604,106 @@
     </div>
 
 
+
+
+
+
+    <!-- <div class="chart1 chartDiv">
+
+            <div style="width: 25%; background-color: red;">
+                <span style="font-size: 0.65rem;">Você está <br> aqui agora </span>
+                <div class="bar">
+                    <div class="barContent"
+                    style=" background:linear-gradient(to top, #909e10, #d3e815); height: 20%; width: 80px;">
+                </div>
+            </div>
+            <span> HOJE </span>    
+        </div>
+        </div>
+        <div class="chart2 chartDiv">
+            <div class="bar">
+                <div class="barContent"
+                    style=" background: linear-gradient(to top, #0f9b4a, #14d665); height: 44%; width: 80px;">
+                    2H
+                </div>
+            </div>
+        </div>
+        <div class="chart3 chartDiv">
+            <div class="bar">
+                <div class="barContent"
+                    style=" background: linear-gradient(to top, #0f9b4a, #14d665); height: 70%; width: 80px;">
+                    7D
+                </div>
+            </div>
+        </div>
+        <div class="chart4 chartDiv">
+            <div class="bar">
+                <div class="barContent"
+                    style=" background: linear-gradient(to top, #0f9b4a, #14d665); height:90%; width: 80px;">
+                    14d
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+
     <!-- div 0 -->
 
     <div id="id0" class="current">
 
         <h1 class="title">
-            Qual é a sua idade?
+            What is your age?
         </h1>
 
         <span class="description">
-            Isso é importante para entendermos o nível da sua testosterona e ansiedade.
+            This is important for us to understand your testosterone and anxiety levels.
         </span>
 
 
         <div class="buttons">
             <button class="option" onclick="selectAge(1)" style="padding-bottom: 0;">
-                18 a 25
-                <img style="width: 120px; margin-top: 10px;"
-                    src="imagens/boy1.webp" alt="">
+                18 to 25
+                <img style="width: 120px; margin-top: 10px;" src="imagens/boy1.webp" alt="">
             </button>
             <button class="option" onclick="selectAge(2)" style="padding-bottom: 0;">
-                26 a 46
-                <img style="width: 120px; margin-top: 10px;"
-                src="imagens/boy2.webp" alt="">
+                26 to 46
+                <img style="width: 120px; margin-top: 10px;" src="imagens/boy2.webp" alt="">
             </button>
         </div>
 
         <div class="buttons">
             <button class="option" onclick="selectAge(3)" style="padding-bottom: 0;">
-                46 a 55
-                <img style="width: 120px; margin-top: 10px;"
-                src="imagens/boy3.webp" alt="">
+                46 to 55
+                <img style="width: 120px; margin-top: 10px;" src="imagens/boy3.webp" alt="">
             </button>
             <button class="option" onclick="selectAge(4)" style="padding-bottom: 0;">
-                56 ou mais
-                <img style="width: 120px; margin-top: 10px;"
-                src="imagens/boy4.webp" alt="">
+                56 or older
+                <img style="width: 120px; margin-top: 10px;" src="imagens/boy4.webp" alt="">
             </button>
         </div>
 
     </div>
 
     <div class="noCurrent" id="id1">
-        <h1 class="title">Com qual frequência você perde o controle no sexo e acaba gozando mais rápido do que gostaria?
+        <h1 class="title">How often do you lose control during sex and end up ejaculating quicker than you would like?
         </h1>
-        <span class="description">Selecione o que melhor se encaixa no seu caso</span>
+        <span class="description">Select what best fits your case</span>
 
         <div class="buttons">
             <button class="option simpleButton" onclick="nextStep()">
-                Sempre
+                Always
             </button>
             <button class="option simpleButton" onclick="nextStep()">
-                Quase sempre
+                Almost always
             </button>
         </div>
 
         <div class="buttons">
             <button class="option simpleButton" onclick="nextStep()">
-                Muitas vezes
+                Often
             </button>
             <button class="option simpleButton" onclick="nextStep()">
-                Poucas vezes
+                Sometimes
             </button>
         </div>
 
@@ -593,62 +716,58 @@
 
     <div class="noCurrent" id="id2">
         <h1 class="title">
-            Quanto tempo você aguenta
+            How long can you last
             <br>
-            na maioria das vezes?
+            on average?
         </h1>
 
 
         <div class="buttons">
             <button class="option" onclick="nextStep()">
-                <img style="width: 80px; margin-bottom: 10px; padding: 20px;"
-                    src="imagens/emoji1.png" alt="">
-                5 minutos <br> ou menos
+                <img style="width: 80px; margin-bottom: 10px; padding: 20px;" src="imagens/emoji1.png" alt="">
+                5 minutes <br> or less
             </button>
             <button class="option" onclick="nextStep()">
-                <img style="width: 80px; margin-bottom: 10px; padding: 20px;"
-                    src="imagens/emoji2.png" alt="">
-                10 minutos <br> ou menos
+                <img style="width: 80px; margin-bottom: 10px; padding: 20px;" src="imagens/emoji2.png" alt="">
+                10 minutes <br> or less
             </button>
         </div>
 
         <div class="buttons">
             <button class="option" onclick="nextStep()">
-                <img style="width: 80px; margin-bottom: 10px; padding: 20px;"
-                    src="imagens/emoji3.png" alt="">
-                15 minutos <br> ou menos
+                <img style="width: 80px; margin-bottom: 10px; padding: 20px;" src="imagens/emoji3.png" alt="">
+                15 minutes <br> or less
             </button>
             <button class="option" onclick="nextStep()">
-                <img style="width: 80px; margin-bottom: 10px; padding: 20px;"
-                    src="imagens/emoji4.png" alt="">
-                25 minutos <br> ou menos
+                <img style="width: 80px; margin-bottom: 10px; padding: 20px;" src="imagens/emoji4.png" alt="">
+                25 minutes <br> or less
             </button>
         </div>
     </div>
 
     <div class="noCurrent" id="id3">
         <h1 class="title">
-            Você sofre com ejaculação
+            How long have you been suffering
             <br>
-            precoce há quanto tempo?
+            from premature ejaculation?
         </h1>
 
 
         <div class="buttons">
             <button class="option simpleButton" onclick="nextStep()">
-                Já faz alguns <br> meses
+                It's been a few <br> months
             </button>
             <button class="option simpleButton" onclick="nextStep()">
-                Há algumas <br> semanas
+                A few weeks ago <br> weeks ago
             </button>
         </div>
 
         <div class="buttons">
             <button class="option simpleButton" onclick="nextStep()">
-                Faz alguns <br> anos
+                It's been a few <br> years
             </button>
             <button class="option simpleButton" onclick="nextStep()">
-                Começou faz <br> alguns dias
+                Started a few <br> days ago
             </button>
         </div>
 
@@ -659,67 +778,67 @@
 
     <div class="noCurrent" id="id4">
         <h1 class="title">
-            Você não está sozinho !
+            You are not alone !
         </h1>
 
         <span class="description">
-            Para eliminar a Ejaculação Precoce de maneira definitiva, primeiro você precisa descobrir a raiz do problema
-            e depois seguir uma Receita que funcione especificamente para VOCÊ!
+            To permanently eliminate Premature Ejaculation, you first need to discover the root of the problem and then
+            follow a Prescription that works specifically for YOU!
         </span>
 
         <img src="imagens/midImage1.webp" alt="">
 
         <button class="continueButton" onclick="nextStep()">
-            Continuar
+            Continue
         </button>
     </div>
 
     <div id="id5" class="noCurrent">
         <h1 class="title">
-            Como você se sente <br> quando isso acontece?
+            How do you feel <br> when this happens?
         </h1>
 
         <span class="description">
-            Não deveria ser tão rápido ...
+            It shouldn't be so quick...
         </span>
 
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
             <img class="askIcon" src="imagens/emoji5.png" alt="">
-            <span>Já me acostumei, e por isso não faço mais sexo</span>
+            <span>I've gotten used to it, and that's why I don't have sex anymore</span>
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
             <img class="askIcon" src="imagens/emoji6.png" alt="">
-            <span>Me sinto mal, e sei que preciso buscar ajuda</span>
+            <span>I feel bad, and I know I need to seek help</span>
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
             <img class="askIcon" src="imagens/emoji7.png" alt="">
-            <span>Me sinto péssimo, mas não sei o que fazer</span>
+            <span>I feel terrible, but I don't know what to do</span>
         </div>
     </div>
 
     <div id="id6" class="noCurrent">
         <h1 class="title">
-            Esse problema já causou outros <br> problemas ainda maiores?
+            Has this problem caused even <br> bigger problems?
         </h1>
 
         <span class="description">
-            Isso pode trazer consequencias <br> muito ruins
+            This can lead to very <br> bad consequences
         </span>
 
         <div style="display: flex;">
             <img style="max-width: 230px;" src="imagens/doutor3.webp" alt="">
             <div style="display: flex; flex-direction: column;">
                 <button class="option simpleButton" onclick="nextStep()">
-                    Sim, já causou <br> muitos problemas
+                    Yes, it has caused <br> many problems
                 </button>
                 <button class="option simpleButton" onclick="nextStep()">
-                    Sim, já causou <br> discussões
+                    Yes, it has caused <br> arguments
                 </button>
                 <button class="option simpleButton" onclick="nextStep()">
-                    Por enquanto <br> não causou
+                    So far, it <br> hasn't caused any
                 </button>
             </div>
         </div>
@@ -727,44 +846,44 @@
 
     <div class="noCurrent" id="id7">
         <h1 class="title">
-            Cuidado !
+            Be careful! !
         </h1>
 
         <span class="description">
-            A ejaculação precoce pode causar <br> problemas ainda maiores.
+            Premature ejaculation can cause <br> even bigger problems.
         </span>
 
         <img src="imagens/midImage2.webp" alt="">
 
         <button class="continueButton" onclick="nextStep()">
-            Continuar
+            Continue
         </button>
     </div>
 
 
     <div class="noCurrent" id="id8">
         <h1 class="title">
-            Quando você vai fazer sexo, você se
+            When you are about to have sex,
             <br>
-            sente nervoso e inseguro ?
+            do you feel nervous and insecure?
         </h1>
 
 
         <div class="buttons">
             <button class="option simpleButton" onclick="nextStep()">
-                sim
+                yes
             </button>
             <button class="option simpleButton" onclick="nextStep()">
-                Na maioria das vezes
+                Most of the time
             </button>
         </div>
 
         <div class="buttons">
             <button class="option simpleButton" onclick="nextStep()">
-                Me sinto ansioso
+                I fell anxious
             </button>
             <button class="option simpleButton" onclick="nextStep()">
-                Raramente
+                Rarely
             </button>
         </div>
 
@@ -775,48 +894,48 @@
 
     <div id="id9" class="noCurrent">
         <h1 class="title">
-            Por que você acha que não consegue controlar a ejaculação precoce?
+            Why do you think you can't control premature ejaculation?
         </h1>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            A vontade de gozar vem rápido <br> e não da para controlar
+            The urge to ejaculate comes <br> quickly and is uncontrollable
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Meu pênis fica muito <br> sensível no sexo
+            My penis becomes very <br> sensitive during sex
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Fico muito ansioso e nervoso <br> na hora do sexo
+            I get very anxious and <br> nervous during sex
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Quando começo meter sem parar <br> gozo rápido
+            When I start thrusting non-stop, <br> I ejaculate quickly
         </div>
     </div>
 
 
     <div id="id10" class="noCurrent">
         <h1 class="title">
-            Na sua opinião, quanto é <br> um tempo bom na cama?
+            In your opinion, what is a <br> good amount of time in bed?
         </h1>
 
-        <span class="description">Escolha o que mais faz sentido para você.</span>
+        <span class="description">Choose what makes the most sense for you.</span>
 
         <div style="display: flex;">
             <img style="max-width: 260px;" src="imagens/doutor3.webp" alt="">
             <div style="display: flex; flex-direction: column;">
                 <button class="option simpleButton" onclick="nextStep()">
-                    Quanto mais tempo, melhor!
+                    The longer, the better!
                 </button>
                 <button class="option simpleButton" onclick="nextStep()">
-                    Quero durar pelo menos 5 minutos
+                    I want to last at least 5 minutes
                 </button>
                 <button class="option simpleButton" onclick="nextStep()">
-                    Quero durar pelo menos 10 minutos
+                    I want to last at least 10 minutes
                 </button>
                 <button class="option simpleButton" onclick="nextStep()">
-                    Quero durar 30 minutos ou mais
+                    I want to last 30 minutes or more"
                 </button>
             </div>
         </div>
@@ -824,47 +943,45 @@
 
     <div id="id11" class="noCurrent">
         <h1 class="title">
-            Você assiste vídeos pornôs?
+            Do you watch porn videos?
         </h1>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Sim, assisto com frequência
+            Yes, I watch frequently
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Sim, às vezes
+            Yes, sometimes
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Já assisti, mas parei
+            I used to watch, but I stopped
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Não gosto de assistir
+            I don't like to watch
         </div>
     </div>
 
     <div id="id12" class="noCurrent">
 
         <h1 class="title">
-            Vocẽ já procurou ajuda ?
+            Have you sought help?
         </h1>
 
         <span class="description">
-            Você já tentou resolver <br> este problema antes ?
+            Have you tried to <br> solve this problem before?
         </span>
 
 
         <div class="buttons">
             <button class="option" onclick="nextStep()" style="padding: 40px 60px">
-                sim
-                <img style="width: 80px; margin-top: 10px;"
-                    src="imagens/emoji8.png" alt="">
+                yes
+                <img style="width: 80px; margin-top: 10px;" src="imagens/emoji8.png" alt="">
             </button>
             <button class="option" onclick="nextStep()" style="padding: 40px 60px">
-                não
-                <img style="width: 80px; margin-top: 10px; ;"
-                    src="imagens/emoji9.png" alt="">
+                no
+                <img style="width: 80px; margin-top: 10px; ;" src="imagens/emoji9.png" alt="">
             </button>
         </div>
     </div>
@@ -873,17 +990,17 @@
 
     <div class="noCurrent" id="id13">
         <h1 class="title">
-            Cuidado com as capsulas !
+            Be careful with the capsules!
         </h1>
 
         <span class="description">
-            Grande parte das cápsulas que <br> existem no mercado não funcionam.
+            Most of the capsules available<br> in the market do not work.
         </span>
 
         <img src="imagens/midImage3.webp" alt="">
 
         <button class="continueButton" onclick="nextStep()">
-            Continuar
+            Continue
         </button>
     </div>
 
@@ -893,19 +1010,19 @@
 
     <div id="id15" class="noCurrent">
         <h1 class="title">
-            analisando
+            analyzing
         </h1>
         <br>
-        <span>Estamos analisando suas respostas <br> e preparando seu relatório</span>
+        <span>We are analyzing your answers <br> and preparing your report</span>
         <br>
         <div class="c-loader"></div>
     </div>
 
     <div class="noCurrent" id="id16">
-        <h1 class="title"> Análise inicial do seu perfil </h1>
+        <h1 class="title"> Initial analysis of your profile </h1>
         <div class="buttons">
             <div class="reportScore">
-                SEU DIAGNÓSTICO
+                YOUR DIAGNOSIS
                 <div class="circular">
                     <div class="inner"></div>
                     <div class="outer"></div>
@@ -929,7 +1046,7 @@
 
             <div class="reportScore" style="padding: 0; overflow: hidden;">
                 <div class="reportScoreHeader" style="width: 100%;">
-                    Resultado: Ruim 🙂
+                    Result: Poor 🙂
                 </div>
                 <img class="noCurrent" id="age1" src="/imagens/boy1.webp" alt="">
                 <img class="noCurrent" id="age2" src="/imagens/boy2.webp" alt="">
@@ -939,154 +1056,159 @@
         </div>
 
         <div class="chartsDiv">
-            <div class="chart1 chartDiv">
+
+            <div class="chart">
                 <div class="bar">
                     <div class="barContent"
-                        style=" background: linear-gradient(to top, #9c8702, #ffe229); height: 57%; width: 80px;">
-                        57%
+                        style=" background:linear-gradient(to top, #9c8702, #ffe229); height: 57%; width: 80px;">
+                        <span style="color: #fff;">57%</span>
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">ANSIEDADE</span>
             </div>
-            <div class="chart2 chartDiv">
+            <div class="chart">
                 <div class="bar">
                     <div class="barContent"
-                        style=" background: linear-gradient(to top, #b35c1e, #ff5b45); height: 44%; width: 80px;">
-                        44%
+                        style=" background:linear-gradient(to top, #b35c1e, #ff5b45); height: 42%; width: 80px;">
+                        <span style="color: #fff;">42%</span>
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">CONFIANÇA</span>
             </div>
-            <div class="chart3 chartDiv">
+
+            <div class="chart">
                 <div class="bar">
                     <div class="barContent"
-                        style=" background: linear-gradient(to top, #b35c1e, #ff5b45); height: 39%; width: 80px;">
-                        39%
+                        style=" background:linear-gradient(to top, #b35c1e, #ff5b45); height: 42%; width: 80px;">
+                        <span style="color: #fff;">42%</span>
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">VIRILIDADE</span>
             </div>
-            <div class="chart4 chartDiv">
+
+            <div class="chart" style="border: none;">
                 <div class="bar">
                     <div class="barContent"
-                        style=" background: linear-gradient(to top, #b35c1e, #ff5b45); height: 33%; width: 80px;">
-                        33%
+                        style=" background:linear-gradient(to top, #b35c1e, #ff5b45); height: 38%; width: 80px;">
+                        <span style="color: #fff;">38%</span>
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">TESTOSTERONA</span>
             </div>
         </div>
 
+
         <div class="preocupantDiv">
-            <span style="font-weight: 600;"> Sua situação é preocupante.</span>
+            <span style="font-weight: 600;"> Your situation is worrisome.</span>
             <br>
-            <span>Você receberá uma receita desenvolvida por grandes médicos e urologistas especialistas em performance
-                sexual masculina de alta qualidade.</span>
+            <span>You will receive a prescription developed by top doctors and urologists specializing in high-quality
+                male sexual performance.</span>
         </div>
 
         <button class="continueButton" onclick="nextStep()">
-            Continuar
+            Continue
         </button>
     </div>
 
     <div id="id17" class="noCurrent">
         <h1 class="title">
-            Qual a qualidade da sua ereção?
+            What is the quality of your erection?
         </h1>
 
         <span class="description">
-            Isso é importante para descobrirmos a raiz do problema.
+            This is important to discover the root of the problem.
         </span>
 
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
             <img class="askIcon" src="imagens/emoji5.png" alt="">
-            <span>Fico bastante duro, mas <br> gozo rápido</span>
+            <span>I get quite hard, <br> but I ejaculate quickly</span>
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
             <img class="askIcon" src="imagens/emoji6.png" alt="">
-            <span>Fica mole do nada quando tenho ansiedade</span>
+            <span>It goes soft suddenly when I am anxious</span>
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
             <img class="askIcon" src="imagens/emoji7.png" alt="">
-            <span>Tenho dificuldade para <br> ficar duro</span>
+            <span>I have difficulty <br> getting hard</span>
         </div>
     </div>
 
     <div id="id18" class="noCurrent">
         <h1 class="title">
-            Diga-nos o que você gostaria de<br> melhorar com o seu Tônico?
+            Tell us what you would like<br> to improve with your Tonic?
 
         </h1>
 
 
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Quero durar mais tempo transando
+            I want to last longer in bed
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Quero ter ereções mais fortes
+            I want stronger erections
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            As duas opções acima
+            Both of the above options
         </div>
     </div>
 
 
     <div class="noCurrent" id="id19">
         <h1 class="title">
-            Quanto tempo você quer
+            How long do you want
             <br>
-            durar na cama ?
+            to last in bed?
         </h1>
 
 
         <div class="buttons">
             <button class="option" style="padding: 20px 60px;" onclick="nextStep()">
-                <img style="width: 80px; margin-bottom: 10px;"
-                    src="imagens/time1.png" alt="">
-                até 5 minutos
+                <img style="width: 80px; margin-bottom: 10px;" src="imagens/time1.png" alt="">
+                up to 5 minutes
             </button>
             <button class="option" style="padding: 20px 60px;" onclick="nextStep()">
-                <img style="width: 80px; margin-bottom: 10px;"
-                    src="imagens/time2.png" alt="">
-                até 15 minutos
+                <img style="width: 80px; margin-bottom: 10px;" src="imagens/time2.png" alt="">
+                up to 15 minutes
             </button>
         </div>
 
         <div class="buttons">
             <button class="option" style="padding: 20px 60px;" onclick="nextStep()">
-                <img style="width: 80px; margin-bottom: 10px;"
-                    src="imagens/time3.png" alt="">
-                até 30 minutos
+                <img style="width: 80px; margin-bottom: 10px;" src="imagens/time3.png" alt="">
+                up to 30 minutes
             </button>
             <button class="option" style="padding: 20px 60px;" onclick="nextStep()">
-                <img style="width: 80px; margin-bottom: 10px;"
-                    src="imagens/time4.png" alt="">
-                1 hora ou mais
+                <img style="width: 80px; margin-bottom: 10px;" src="imagens/time4.png" alt="">
+                1 hour or more
             </button>
         </div>
     </div>
 
     <div id="id20" class="noCurrent">
         <h1 class="title">
-            Em quanto tempo você quer<br> eliminar a Ejaculação Precoce??
+            How soon do you want <br> to eliminate Premature Ejaculation??
         </h1>
 
-        <span class="description">Diremos quais ingredientes usar e a quantidade certa para tomar de acordo com o tempo
-            que você quer os resultados.</span>
+        <span class="description">We will tell you which ingredients to use and the right amount to take according to
+            the
+            time you want the results.</span>
 
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Quero eliminar a ejaculação precoce em 24 horas
+            I want to eliminate premature ejaculation in 24 hours
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Quero eliminar e ejaculação precoce com 2 semanas de tratamento
+            I want to eliminate premature ejaculation with 2 weeks of treatment
         </div>
 
         <div onclick="nextStep()" class="option" style="display: flex; flex-direction: row; text-align: initial;">
-            Quero eliminar a ejaculação precoce com 1 mês de tratamento
+            I want to eliminate premature ejaculation with 1 month of treatment
         </div>
     </div>
 
@@ -1096,62 +1218,69 @@
 
     <div id="id22" class="noCurrent">
         <h1 class="title">
-            analisando
+            analyzing
         </h1>
-        <span>Estamos analisando suas respostas <br> e preparando seu relatório</span>
+        <span>We are analyzing your answers <br> and preparing your report</span>
         <div class="c-loader"></div>
     </div>
 
     <div id="id23" class="noCurrent">
-        <h1 class="title">Sua receita exclusiva</h1>
-        <span class="description">Baseado no seu perfil, montamos uma <br> receita exclusivo pra você. </span>
-        <h1 class="title">Você vai durar mais de 1 hora <br> na cama em <u>14 dias</u></h1>
-
+        <h1 class="title">Your exclusive prescription</h1>
+        <span class="description">Based on your profile, we have assembled <br> an exclusive prescription for you.
+        </span>
+        <h1 class="title">You will last more than <br> 1 hour in bed in <u>14 days</u></h1>
         <div class="chartsDiv">
-            <div class="chart1 chartDiv">
-
+            <div class="chart">
+                <span style="margin-bottom: 10px ;">você está <br> aqui agora</span>
                 <div class="bar">
                     <div class="barContent"
                         style=" background:linear-gradient(to top, #909e10, #d3e815); height: 20%; width: 80px;">
-                        HOJE
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">HOJE</span>
             </div>
-            <div class="chart2 chartDiv">
+            <div class="chart">
+                <span style="margin-bottom: 10px ;">Duração de <br> 20 minutos</span>
                 <div class="bar">
                     <div class="barContent"
-                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height: 44%; width: 80px;">
-                        2H
+                        style=" background:linear-gradient(to top, #0f9b4a, #14d665); height: 50%; width: 80px;">
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">HOJE</span>
             </div>
-            <div class="chart3 chartDiv">
+
+            <div class="chart">
+                <span style="margin-bottom: 10px ;">Duração de <br> 1 hora</span>
                 <div class="bar">
                     <div class="barContent"
-                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height: 70%; width: 80px;">
-                        7D
+                        style=" background:linear-gradient(to top, #0f9b4a, #14d665); height: 70%; width: 80px;">
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">HOJE</span>
             </div>
-            <div class="chart4 chartDiv">
+
+            <div class="chart" style="border: none;">
+                <span style="margin-bottom: 10px ;">só goza <br> se quiser</span>
                 <div class="bar">
                     <div class="barContent"
-                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height:90%; width: 80px;">
-                        14d
+                        style=" background:linear-gradient(to top, #0f9b4a, #14d665); height: 90%; width: 80px;">
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">HOJE</span>
             </div>
         </div>
+
 
         <div class="preocupantDiv">
             <span style="font-weight: 600;"> Seu tratamento está pronto.</span>
             <br>
-            <span>Criamos uma receita caseira personalizada para você. Você vai gozar so quando decidir em <strong>14
+            <span>Criamos uma receita caseira personalizada para você. Você vai gozar so quando decidir em
+                <strong>14
                     dias</strong>.</span>
         </div>
 
         <button class="continueButton" onclick="nextStep()">
-            Continuar
+            Continue
         </button>
     </div>
 
@@ -1191,31 +1320,33 @@
                     </span>
 
                     <div class="checkoutStatus" style="    background: #de4949;
-                    color: #FFFFFF; max-width:190px ">
+                    color: #FFFFFF; max-width:190px; font-weight: 600; ">
                         Sua duração esá muito abaixo da média
                     </div>
                 </div>
                 <div class="description">
                     <span class="description">
-                        Duração das suas
+                        Duração depois de tomar
                         <br>
-                        relações sexuais
+                        sua receita caseira
                         <br>
-                        atualemnte
+                        exclusiva
                     </span>
 
-                    <div class="checkoutStatus" style="    background: #2edf0b;
-                    color: #FFFFFF; max-width: 190px">
+                    <div class="checkoutStatus" style="    background: #1cad59;
+                    color: #FFFFFF; max-width: 190px; font-weight: 600; ">
                         Você vai durar pelo menos uma hora na cama
                     </div>
                 </div>
             </div>
         </div>
 
-        <!--  inserir checkout aqui  -->
-        <button class="continueButton" onclick="nextStep()" style="position:relative ; margin-top: 30px;">
-            Continuar
-        </button>
+        <!--  -->
+        <a class="continueButton" href="https://pay.kirvano.com/74cb800f-2d66-4b3d-be56-72b00a72d02b"
+            style="display: inline-block; margin-top: 30px; text-decoration: none; /* Outros estilos de botão aqui */">
+            Começar agora
+        </a>
+
 
         <div class="securePayment">
             <img src="https://app.descubrahoje.net/novo-tonico/images/icons/safe.webp" alt="">
@@ -1226,39 +1357,66 @@
             pronta. </h1>
 
         <div class="chartsDiv">
-            <div class="chart1 chartDiv">
 
+            <div class="chart">
+                <span style="margin-bottom: 10px ;">você está <br> aqui agora</span>
                 <div class="bar">
                     <div class="barContent"
                         style=" background:linear-gradient(to top, #909e10, #d3e815); height: 20%; width: 80px;">
-                        HOJE
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">HOJE</span>
             </div>
-            <div class="chart2 chartDiv">
+            <div class="chart">
+                <span style="margin-bottom: 10px ;">Duração de <br> 20 minutos</span>
                 <div class="bar">
                     <div class="barContent"
-                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height: 44%; width: 80px;">
-                        2H
+                        style=" background:linear-gradient(to top, #0f9b4a, #14d665); height: 50%; width: 80px;">
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">HOJE</span>
             </div>
-            <div class="chart3 chartDiv">
+
+            <div class="chart">
+                <span style="margin-bottom: 10px ;">Duração de <br> 1 hora</span>
                 <div class="bar">
                     <div class="barContent"
-                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height: 70%; width: 80px;">
-                        7D
+                        style=" background:linear-gradient(to top, #0f9b4a, #14d665); height: 70%; width: 80px;">
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">HOJE</span>
             </div>
-            <div class="chart4 chartDiv">
+
+            <div class="chart" style="border: none;">
+                <span style="margin-bottom: 10px ;">só goza <br> se quiser</span>
                 <div class="bar">
                     <div class="barContent"
-                        style=" background: linear-gradient(to top, #0f9b4a, #14d665); height:90%; width: 80px;">
-                        14d
+                        style=" background:linear-gradient(to top, #0f9b4a, #14d665); height: 90%; width: 80px;">
                     </div>
                 </div>
+                <span style="font-size: 0.7rem; padding: 10px; font-weight: 700;">HOJE</span>
             </div>
+        </div>
+
+
+        <div style="display: flex;">
+
+            <div class="goals">
+                <span>Seu maior objetivo</span>
+                <div style="display: flex; margin-top: 10px; align-items: initial; font-weight: 400;">
+                    <img src="https://app.descubrahoje.net/novo-tonico/images/icons/goal.webp" alt="">
+                    Durar mais de <br> 1 hora na cama
+                </div>
+            </div>
+
+            <div class="goals">
+                <span>Seu maior objetivo</span>
+                <div style="display: flex; margin-top: 10px; align-items: initial; font-weight: 400;">
+                    <img src="https://app.descubrahoje.net/novo-tonico/images/icons/clock.webp" alt="">
+                    Até 16 dias a partir de hoje
+                </div>
+            </div>
+
         </div>
 
         <div class="testDiv">
@@ -1274,16 +1432,73 @@
             </div>
         </div>
 
-        <!--  inserir checkout aqui  -->
-        <button class="continueButton" onclick="nextStep()" style="position:relative ; margin-top: 30px;">
-            Começar agora
-        </button>
-
+        <a class="continueButton" href="https://pay.kirvano.com/74cb800f-2d66-4b3d-be56-72b00a72d02b"
+            style="display: inline-block; margin-top: 30px; text-decoration: none; /* Outros estilos de botão aqui */">
+            Começar Agora
+        </a>
 
         <div class="securePayment">
             <img src="https://app.descubrahoje.net/novo-tonico/images/icons/safe.webp" alt="">
             Pagamento 100% seguro
         </div>
+
+        <div class="reciviments">
+            <h1 class="title">
+                O que você vai receber ?
+            </h1>
+
+            <span>
+                Sua receita comprovada, rápida e barata de fazer em casa para eliminar a Ejaculação Precoce.
+
+            </span>
+            <span>
+                Um tratamento simples e fácil de ser aplicado, que não trará nenhum prejuízo para a sua saúde.
+            </span>
+
+            <span>
+                Tenha uma ereção 3x mais dura que vai deixar ela impressionada e com muito tesão.
+            </span>
+
+            <span>
+                Criado por profissionais e planejado para encaixar com o seu perfil, de acordo com as suas respostas.
+            </span>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <span style="font-size: 1rem; font-weight: 600;">98%</span>
+                <br>
+                Clientes <br> satisfeitos
+            </div>
+            <div class="stat">
+                <span style="font-size: 1rem; font-weight: 600;">134 mil</span>
+                <br>
+                Pessoas <br> atendidas
+            </div>
+            <div class="stat">
+                <span style="font-size: 1rem; font-weight: 600;">367%</span>
+                <br>
+                Aumento médio <br> duração
+            </div>
+        </div>
+
+        <div class="testDiv">
+            <div style="display: flex; flex-direction: column; margin-bottom: 0;">
+                <span class="title">TESTE POR 30 DIAS</span>
+                <span>Sem compromisso</span>
+            </div>
+
+            <div style="background: #c7fcdc; text-align: center; padding: 10px 20px;">
+                por apenas
+                <br>
+                <span style="font-weight: 600; font-size: 20px;">R$ 5,77</span>
+            </div>
+        </div>
+
+        <a class="continueButton" href="https://pay.kirvano.com/74cb800f-2d66-4b3d-be56-72b00a72d02b"
+            style="display: inline-block; margin-top: 10px; text-decoration: none; /* Outros estilos de botão aqui */">
+            Começar Agora
+        </a>
 
         <div class="semComp">
             <img style="margin-bottom: 20px;" src="https://app.descubrahoje.net/novo-tonico/images/icons/garanty.webp"
@@ -1310,7 +1525,7 @@
         let score = 0;
 
 
-        function selectAge(age){
+        function selectAge(age) {
             document.getElementById('age' + age).classList.remove('noCurrent');
             document.getElementById('age' + age).classList.add('current');
             document.getElementById('agefinal' + age + 'a').classList.remove('noCurrent');
@@ -1330,7 +1545,7 @@
                 // aumenta a largura da barra de load dinamicamente com o currentQuestion
                 document.querySelector('.progressBar').style.width = (currentQuestion * 100) / 24 + "%";
                 // aumenta a animação da barra de load dinamicamente com o currentQuestion
-              
+
                 return
             }
 
